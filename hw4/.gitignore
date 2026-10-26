@@ -1,0 +1,34 @@
+# --- Secrets ---------------------------------------------------------------------------------
+.env
+*.local
+
+# --- Data pack: stays local, never pushed -----------------------------------------------------
+# campus_customs.db (with shopper accounts, password hashes and chats), its backups, the
+# product photos (products/ and products_original/), and private source photos.
+data/
+*.db
+*.db-journal
+*.zip
+
+# --- Python ----------------------------------------------------------------------------------
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# --- Front end (frontend/.gitignore covers the rest) ----------------------------------------
+node_modules/
+frontend/dist/
+
+# --- Output ----------------------------------------------------------------------------------
+# Rescue file, written only if audit_trail.json's end is ever damaged.
+output/*.rescue.json
+# Old copy of the app-check screenshots (the page uses output/app_check_images/).
+output/app_check/
+
+# --- Editors and OS --------------------------------------------------------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

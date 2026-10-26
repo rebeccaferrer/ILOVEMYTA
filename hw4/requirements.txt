@@ -1,0 +1,10 @@
+opencv-python-headless
+openai
+python-dotenv
+fastapi
+uvicorn[standard]
+zxcvbn
+email-validator
+httpx
+pytest
+pydantic-ai-slim[openai]==2.55.0

@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campus Customs App Check</title>
+  <style>
+    :root {
+      --yale-blue: #00356b;
+      --yale-blue-light: #286dc0;
+      --ink: #1d1d1d;
+      --muted: #4d4d4d;
+      --line: #e2e2e2;
+      --surface: #f5f5f5;
+      --page: #ffffff;
+      --pass: #1a7f37;
+      --pass-bg: #e6f4ea;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --ink: #eceff3;
+        --muted: #b6bcc6;
+        --line: #2f3a48;
+        --surface: #16202c;
+        --page: #0d151f;
+        --pass: #5fd07c;
+        --pass-bg: #12301d;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font: 16px/1.55 "Open Sans", "Segoe UI", system-ui, sans-serif;
+    }
+    header {
+      background: var(--yale-blue);
+      color: #fff;
+      padding: 32px 16px;
+    }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+    header .wrap { padding: 0; }
+    .eyebrow {
+      margin: 0 0 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+    h1 { margin: 0 0 8px; font-size: clamp(1.6rem, 4vw, 2.2rem); text-transform: uppercase; }
+    header p { margin: 0; opacity: 0.92; }
+    main { padding: 28px 0 48px; }
+    h2 {
+      margin: 0 0 4px;
+      color: var(--yale-blue);
+      font-size: 1.25rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) h2 { color: #8fb8ea; }
+    }
+    dl.meta {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 6px 16px;
+      margin: 0 0 28px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+    dl.meta dt { font-weight: 700; color: var(--muted); }
+    dl.meta dd { margin: 0; }
+    table.summary { width: 100%; border-collapse: collapse; margin: 0 0 32px; }
+    table.summary th, table.summary td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    table.summary th { background: var(--surface); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: var(--pass-bg);
+      color: var(--pass);
+      font-size: 0.8rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    section.check {
+      margin: 0 0 36px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--yale-blue);
+      border-radius: 6px;
+    }
+    .check-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+    h3 { margin: 18px 0 6px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+    ol, ul { margin: 0; padding-left: 22px; }
+    li + li { margin-top: 4px; }
+    .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 8px; }
+    figure { margin: 0; }
+    figure img {
+      display: block;
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+    figure a img { transition: border-color 0.15s, box-shadow 0.15s; }
+    figure a:hover img, figure a:focus-visible img { border-color: var(--yale-blue-light); box-shadow: 0 4px 14px rgba(0, 53, 107, 0.18); }
+    figcaption a { color: var(--yale-blue-light); font-weight: 700; }
+    figcaption { margin-top: 6px; color: var(--muted); font-size: 0.85rem; }
+    code { font-family: Consolas, "Courier New", monospace; font-size: 0.9em; background: var(--surface); padding: 1px 5px; border-radius: 4px; }
+    footer { padding: 16px 0 40px; color: var(--muted); font-size: 0.85rem; }
+    @media (max-width: 600px) {
+      dl.meta { grid-template-columns: 1fr; }
+      dl.meta dd { margin-bottom: 6px; }
+      table.summary th:nth-child(3), table.summary td:nth-child(3) { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <p class="eyebrow">HW 4 · Problem 11 · Site testing</p>
+      <h1>Campus Customs App Check</h1>
+      <p>Manual checks of the live site by the developer, with screenshots as evidence.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <dl class="meta">
+      <dt>Tester</dt><dd>Rebecca Ferrer</dd>
+      <dt>Date</dt><dd>October 26, 2026</dd>
+      <dt>Site</dt><dd>Website <code>http://localhost:5174</code> (React + Vite) with the API at <code>http://localhost:8000</code> (FastAPI)</dd>
+      <dt>Shop assistant</dt><dd>PydanticAI agent using <code>gpt-5.6-luna</code> through Portkey, answering from <code>campus_customs.db</code></dd>
+      <dt>Method</dt><dd>Hands-on use of the site in a web browser, as a shopper would</dd>
+    </dl>
+
+    <h2>Summary</h2>
+    <table class="summary">
+      <thead>
+        <tr><th>#</th><th>Check</th><th>What it covers</th><th>Result</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Create a new account</td><td>Problem 4: sign-up and login</td><td><span class="badge">✓ Passed</span></td></tr>
+        <tr><td>2</td><td>Chat with the shop assistant: inventory levels and dynamic search result cards ("what merch do you have for the school of management?")</td><td>Problems 5–8: agent, tools, chat search that updates the page</td><td><span class="badge">✓ Passed</span></td></tr>
+        <tr><td>3</td><td>Usability feature: a product opened from search results closes back to them</td><td>Problem 9: "Back to … ×" on the product page</td><td><span class="badge">✓ Passed</span></td></tr>
+      </tbody>
+    </table>
+
+    <section class="check" id="check-1">
+      <div class="check-head">
+        <h2>1. Create a new account</h2>
+        <span class="badge">✓ Passed</span>
+      </div>
+      <h3>Steps</h3>
+      <ol>
+        <li>Clicked <strong>Create Account</strong> in the top navigation.</li>
+        <li>Entered first name <em>Rebecca</em>, last name <em>Ferrer</em>, an email address, and a password meeting the site's rules (at least 12 characters, not built from the name, email or Yale words), then confirmed it.</li>
+        <li>Clicked <strong>Create Account</strong>.</li>
+      </ol>
+      <h3>Expected</h3>
+      <ul>
+        <li>The account is created and the shopper is logged in right away.</li>
+        <li>The header greets the shopper by first name and offers <strong>Log Out</strong>.</li>
+      </ul>
+      <h3>Result</h3>
+      <p>Passed. The account was created and the site showed <strong>Hi, Rebecca</strong> and <strong>Log Out</strong> in the header (the home-page carousel was on the game-day photo).</p>
+      <h3>Evidence</h3>
+      <div class="shots">
+        <figure>
+          <a href="app_check_images/1-create-account.png" title="Open full size"><img src="app_check_images/1-create-account.png" alt="The Create Account form filled in with Rebecca Ferrer's details" loading="lazy"></a>
+          <figcaption>The Create Account form, filled in. <a href="app_check_images/1-create-account.png">Full size</a></figcaption>
+        </figure>
+        <figure>
+          <a href="app_check_images/1-logged-in.png" title="Open full size"><img src="app_check_images/1-logged-in.png" alt="The home page after sign-up, with Hi, Rebecca and Log Out in the header" loading="lazy"></a>
+          <figcaption>Logged in after creating the account. <a href="app_check_images/1-logged-in.png">Full size</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="check" id="check-2">
+      <div class="check-head">
+        <h2>2. Chat: inventory levels and dynamic search result cards</h2>
+        <span class="badge">✓ Passed</span>
+      </div>
+      <h3>Steps</h3>
+      <ol>
+        <li>Logged in as Rebecca, opened the <strong>Shop Assistant</strong> chat (bottom right).</li>
+        <li>Asked: <em>"what merch do you have for the school of management?"</em></li>
+      </ol>
+      <h3>Expected</h3>
+      <ul>
+        <li><strong>Inventory:</strong> the assistant answers from the live database with the price and the sizes in stock, and says which sizes are sold out.</li>
+        <li><strong>Dynamic search cards:</strong> the Product page updates to "Shop Assistant results" with matching product cards (photo, name, price, short description), and the chat shows the card too.</li>
+      </ul>
+      <h3>Result</h3>
+      <p>Passed. The assistant replied that it found <strong>1 School of Management item</strong>, the Yale School of Management Crest T-Shirt, <strong>$32.00</strong>, available in XS, S, M, L and XXL, with <strong>XL sold out</strong>. The page changed to <code>/products?chat=54</code> showing its card, and the chat showed the same card.</p>
+      <p>Cross-checked against <code>campus_customs.db</code>: price 3,200 cents ($32.00); stock XS 8, S 8, M 15, L 2, <strong>XL 0</strong>, XXL 12. It's the only School of Management product. Every number in the reply matches.</p>
+      <h3>Evidence</h3>
+      <div class="shots">
+        <figure>
+          <a href="app_check_images/2-chat-search-cards.png" title="Open full size"><img src="app_check_images/2-chat-search-cards.png" alt="The chat answering with price and sizes in stock, and the Product page showing the matching search result card" loading="lazy"></a>
+          <figcaption>One screenshot shows both: the inventory answer in the chat (right) and the dynamic search card on the page (left). <a href="app_check_images/2-chat-search-cards.png">Full size</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="check" id="check-3">
+      <div class="check-head">
+        <h2>3. Usability: a product opened from search results closes back to them</h2>
+        <span class="badge">✓ Passed</span>
+      </div>
+      <h3>Steps</h3>
+      <ol>
+        <li>On the search results page from check 2, clicked the Yale School of Management Crest T-Shirt card to open its full product page.</li>
+        <li>Clicked <strong>Back to School of Management merch ×</strong> at the top right.</li>
+      </ol>
+      <h3>Expected</h3>
+      <ul>
+        <li>The product page names the gallery it came from in its close button, and closing it returns to those search results.</li>
+      </ul>
+      <h3>Result</h3>
+      <p>Passed. The product page showed <strong>Back to School of Management merch ×</strong>, with live stock per size ("Only 2 left" in L, XL sold out with a <strong>Notify me</strong> button). Closing it returned to <code>/products?chat=54</code>, the "School of Management merch" results.</p>
+      <h3>Evidence</h3>
+      <div class="shots">
+        <figure>
+          <a href="app_check_images/3-product-close.png" title="Open full size"><img src="app_check_images/3-product-close.png" alt="The product page for the Yale School of Management Crest T-Shirt with the Back to School of Management merch close button" loading="lazy"></a>
+          <figcaption>The product page and its close button (top right). <a href="app_check_images/3-product-close.png">Full size</a></figcaption>
+        </figure>
+        <figure>
+          <a href="app_check_images/3-back-to-results.png" title="Open full size"><img src="app_check_images/3-back-to-results.png" alt="Back on the School of Management merch search results after closing the product" loading="lazy"></a>
+          <figcaption>Back on the search results after closing it. <a href="app_check_images/3-back-to-results.png">Full size</a></figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    Screenshots are in <code>output/app_check_images/</code> and linked here with relative paths; click any one to open it full size. Automated checks are separate: 74 backend tests pass, and the front end builds and passes its code checks (see <code>output/harness.md</code>).
+  </footer>
+</body>
+</html>
